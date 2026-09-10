@@ -1,38 +1,143 @@
-<!doctype html>
-<html lang="ja">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>VELZO｜近日オープン</title>
-<meta name="description" content="VELZO（ヴェルゾ）のオンラインストアは近日オープンします。最新情報はInstagramでお知らせします。">
-<meta name="robots" content="noindex">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23111214'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%23F5F4F2' stroke-width='4' stroke-dasharray='51 6' stroke-dashoffset='-11'/%3E%3C/svg%3E">
+<title>VELZO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Noto+Sans+JP:wght@400;500&family=Zen+Kaku+Gothic+New:wght@700;900&display=swap">
 <style>
+/* VELZOの正本は4色だけ（世界観ガイド §4）。赤はページ全体で1箇所しか使わない。 */
+:root{
+  --paper:#F5F4F2; --ink:#111111; --grey:#8A8A8A; --red:#D8352A;
+  --hair:rgba(17,17,17,.13); --veil:rgba(17,17,17,.045);
+  --onink:#F5F4F2;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#111111; --ink:#F5F4F2; --grey:#8A8A8A; --red:#E4483C;
+    --hair:rgba(245,244,242,.17); --veil:rgba(245,244,242,.05);
+    --onink:#F5F4F2;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#111111; --ink:#F5F4F2; --grey:#8A8A8A; --red:#E4483C;
+  --hair:rgba(245,244,242,.17); --veil:rgba(245,244,242,.05);
+  --onink:#F5F4F2;
+  color-scheme:dark;
+}
+
 *{box-sizing:border-box}
 html,body{margin:0;padding:0;max-width:100%;overflow-x:hidden}
-body{min-height:100svh;display:grid;place-items:center;padding:32px 20px;
-  background:#111214;color:#F5F4F2;
-  font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
-  -webkit-font-smoothing:antialiased}
-main{width:100%;max-width:520px;text-align:center}
-.logo{width:min(78%,340px);height:auto;display:block;margin:0 auto}
-.lead{margin:44px 0 0;font-size:13px;letter-spacing:.42em;color:#F5F4F2}
-.note{margin:18px 0 0;font-size:13px;line-height:2.1;color:#8A8A8A}
-.ph{display:inline-block}
-.rule{width:40px;height:1px;margin:40px auto;background:#3A3A3A;border:0}
-.links{margin:0;padding:0;list-style:none;font-size:13px;line-height:2.4}
-.links a{color:#F5F4F2;text-decoration:none;border-bottom:1px solid #3A3A3A;
-  padding-bottom:2px;word-break:break-all}
-.links a:hover{border-bottom-color:#F5F4F2}
-.label{color:#8A8A8A;margin-right:10px}
-footer{margin:48px 0 0;font-size:11px;letter-spacing:.18em;color:#5A5A5A}
-@media(max-width:400px){.lead{letter-spacing:.3em}}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:"Noto Sans JP","Hiragino Sans",system-ui,sans-serif;
+  font-size:15px; line-height:2.05; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1000px;margin:0 auto;padding:0 clamp(20px,5vw,56px)}
+h1,h2,h3{font-family:"Zen Kaku Gothic New","Noto Sans JP",sans-serif;margin:0;text-wrap:balance}
+
+/* ── 見出しの小ラベル ─────────────────── */
+.eyebrow{
+  font-family:"Archivo",sans-serif;font-weight:700;font-size:11px;
+  letter-spacing:.26em;text-transform:uppercase;color:var(--grey);margin:0;
+}
+
+/* ── 冒頭。地を反転して主役にする ─────── */
+.hero{background:var(--ink);color:var(--onink);padding:clamp(64px,12vw,132px) 0 clamp(52px,9vw,96px)}
+.mark{width:min(360px,72%);height:auto;display:block;color:var(--onink)}
+.tag-en{
+  font-family:"Archivo",sans-serif;font-weight:800;
+  font-size:clamp(34px,7.4vw,74px);line-height:1.02;letter-spacing:-.018em;
+  margin:clamp(38px,7vw,64px) 0 0;
+}
+/* 🔴 2行目だけ半マス外す＝タグライン「半歩だけ外す」をページの骨格で言う。
+   意味は本文（.why）で明文化しているので、理由の無い装飾ではない。 */
+.tag-en em{display:block;font-style:normal;margin-left:clamp(14px,3.4vw,34px)}
+.tag-ja{
+  font-family:"Zen Kaku Gothic New",sans-serif;font-weight:700;
+  font-size:clamp(15px,2.4vw,19px);letter-spacing:.14em;margin:26px 0 0;
+}
+/* 引かれてから、一箇所だけ切れる線。ロゴの切れ目と同じ理屈 */
+.rule{
+  --gap:22%;
+  height:1px;border:0;margin:clamp(38px,7vw,60px) 0 0;
+  background:linear-gradient(to right,
+    currentColor 0 calc(50% - var(--gap)/2), transparent 0 calc(50% + var(--gap)/2),
+    currentColor 0 100%);
+  opacity:.42;
+  animation:draw 1.15s cubic-bezier(.2,.7,.2,1) .25s both;
+}
+@keyframes draw{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+.status{
+  display:flex;flex-wrap:wrap;gap:6px 26px;margin:22px 0 0;
+  font-family:"Archivo",sans-serif;font-size:11px;font-weight:700;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--grey);
+}
+
+/* ── 節 ───────────────────────────────── */
+section{padding:clamp(56px,10vw,104px) 0}
+.sec-head{display:flex;flex-direction:column;gap:12px;margin:0 0 clamp(26px,4vw,40px)}
+h2{font-size:clamp(19px,3vw,25px);font-weight:900;letter-spacing:.01em}
+
+/* ── ロゴの意味 ───────────────────────── */
+.why{display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(26px,4vw,44px);align-items:start}
+@media(min-width:760px){.why{grid-template-columns:280px minmax(0,1fr)}}
+.why .plate{background:var(--ink);padding:clamp(26px,4vw,38px);display:grid;place-items:center}
+.why .plate svg{width:100%;height:auto;color:var(--onink)}
+.why p{margin:0 0 1.1em;max-width:62ch}
+.why p:last-child{margin-bottom:0}
+/* ページ全体で唯一の赤。ブランドの「言い切り」の記号＝赤い句点 */
+.period{display:inline-block;width:11px;height:11px;background:var(--red);margin-left:5px;vertical-align:baseline}
+
+/* ── 商品 ─────────────────────────────── */
+.looks{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:clamp(12px,2vw,22px)}
+.look{margin:0}
+.look img{width:100%;height:auto;display:block;background:var(--veil)}
+.look figcaption{display:flex;flex-direction:column;gap:3px;padding:11px 2px 0}
+.cat{font-family:"Archivo",sans-serif;font-size:10px;font-weight:700;letter-spacing:.2em;color:var(--grey)}
+.nm{font-size:13px;line-height:1.7}
+@media (prefers-reduced-motion:no-preference){
+  .look{animation:rise .6s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i)*.06s)}
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+}
+.note{margin:clamp(20px,3vw,30px) 0 0;font-size:13px;color:var(--grey)}
+
+/* ── 先に言っておくこと ───────────────── */
+.facts{display:grid;gap:1px;background:var(--hair);border-block:1px solid var(--hair)}
+.facts div{background:var(--paper);padding:clamp(16px,2.6vw,22px) 0}
+.facts dt{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:700;font-size:15px;margin:0}
+.facts dd{margin:5px 0 0;color:var(--grey);font-size:13.5px;max-width:62ch}
+
+/* ── LINE ─────────────────────────────── */
+.join{background:var(--ink);color:var(--onink)}
+.join .inner{padding:clamp(48px,9vw,88px) 0}
+.join h2{font-size:clamp(21px,3.4vw,30px)}
+.join p{max-width:56ch;margin:16px 0 0}
+.cta{
+  display:inline-flex;align-items:center;gap:14px;margin:clamp(26px,4vw,38px) 0 0;
+  padding:17px 32px;background:var(--onink);color:var(--ink);text-decoration:none;
+  font-family:"Zen Kaku Gothic New",sans-serif;font-weight:700;font-size:15px;letter-spacing:.06em;
+  border:1px solid var(--onink);transition:background .18s,color .18s;
+}
+.cta:hover{background:transparent;color:var(--onink)}
+.cta:focus-visible{outline:2px solid var(--red);outline-offset:4px}
+.cta span{font-family:"Archivo",sans-serif;font-weight:700;font-size:12px;letter-spacing:.16em}
+
+/* ── 締め ─────────────────────────────── */
+.ends{display:grid;gap:clamp(22px,3vw,34px);padding-bottom:clamp(56px,9vw,96px)}
+.ends a{color:inherit;text-decoration:none;border-bottom:1px solid var(--hair);padding-bottom:2px;word-break:break-all}
+.ends a:hover{border-bottom-color:var(--ink)}
+.ends a:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+.row{display:flex;flex-wrap:wrap;gap:4px 18px;align-items:baseline}
+.row .k{font-family:"Archivo",sans-serif;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--grey);min-width:104px}
+footer{border-top:1px solid var(--hair);padding:26px 0 clamp(40px,6vw,64px);
+  font-family:"Archivo",sans-serif;font-size:11px;font-weight:500;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--grey);display:flex;flex-wrap:wrap;gap:6px 22px;justify-content:space-between}
 </style>
-</head>
-<body>
-<main>
-<svg class="logo" role="img" aria-label="VELZO" xmlns="http://www.w3.org/2000/svg" viewBox="-16 -16 464 132">
-  <g fill="none" stroke="#F5F4F2" stroke-width="16" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="1.5">
+
+<header class="hero">
+  <div class="wrap">
+    <svg class="mark" role="img" aria-label="VELZO" xmlns="http://www.w3.org/2000/svg" viewBox="-16 -16 464 132">
+  <g fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="1.5">
     <path d="M8 2 L32 100 L44.5 49 M50.5 25 L56 2"/>
     <path d="M94 0 V100 M94 8 H146 M94 50 H116 M126 50 H138 M94 92 H146"/>
     <path d="M176 0 V54 M176 66 V100 M176 92 H228"/>
@@ -40,15 +145,87 @@ footer{margin:48px 0 0;font-size:11px;letter-spacing:.18em;color:#5A5A5A}
     <circle cx="380" cy="50" r="44" stroke-dasharray="248 28.5" stroke-dashoffset="-52"/>
   </g>
 </svg>
-<p class="lead">近日オープン</p>
-<p class="note"><span class="ph">メンズアパレルの</span><span class="ph">オンラインストアを準備しています。</span><br>
-<span class="ph">オープンの日程は、</span><span class="ph">下記のInstagramでお知らせします。</span></p>
-<hr class="rule">
-<ul class="links">
-<li><span class="label">Instagram</span><a href="https://www.instagram.com/velzo_clothes/" rel="noopener">@velzo_clothes</a></li>
-<li><span class="label">お問い合わせ</span><a href="mailto:info@velzo.jp">info@velzo.jp</a></li>
-</ul>
-<footer>&copy; 2026 VELZO</footer>
-</main>
-</body>
-</html>
+    <h1 class="tag-en">BREAK<em>THE ROUTINE.</em></h1>
+    <p class="tag-ja">日常から、半歩だけ外す。</p>
+    <hr class="rule">
+    <div class="status"><span>Kobe, Japan</span><span>Opening Soon</span><span>Men's Apparel</span></div>
+  </div>
+</header>
+
+<section class="wrap">
+  <div class="sec-head"><p class="eyebrow">The Mark</p><h2>なぜ、文字が切れているのか</h2></div>
+  <div class="why">
+    <div class="plate"><svg class="markplate" role="img" aria-label="VELZO" xmlns="http://www.w3.org/2000/svg" viewBox="-16 -16 464 132">
+  <g fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="1.5">
+    <path d="M8 2 L32 100 L44.5 49 M50.5 25 L56 2"/>
+    <path d="M94 0 V100 M94 8 H146 M94 50 H116 M126 50 H138 M94 92 H146"/>
+    <path d="M176 0 V54 M176 66 V100 M176 92 H228"/>
+    <path d="M250 8 H310 M310 8 L287 42.5 M280 53.5 L254 92 M254 92 H314"/>
+    <circle cx="380" cy="50" r="44" stroke-dasharray="248 28.5" stroke-dashoffset="-52"/>
+  </g>
+</svg></div>
+    <div>
+      <p>5つの文字すべてに、切れ目が1つずつ入っています。デザインの都合ではありません。</p>
+      <p>完成しきっていない。一箇所だけ、いつもの形から外れている。私たちが服で売りたい価値と、ロゴの形が同じことを言っています。</p>
+      <p>奇抜な服はつくりません。学校にもバイトにも着ていける服のまま、シルエットと質感だけで「いつもと違う」をつくる。一歩ではなく、半歩<span class="period" aria-hidden="true"></span></p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="sec-head"><p class="eyebrow">First Drop</p><h2>最初に並ぶ服</h2></div>
+  <div class="looks">
+<figure class="look" style="--i:0">
+<img src="img/VEL6001.jpg" width="820" height="1098" alt="サイドラインジャージセットアップを着用" loading="lazy" decoding="async">
+<figcaption><span class="cat">SET UP</span><span class="nm">サイドラインジャージセットアップ</span></figcaption>
+</figure>
+<figure class="look" style="--i:1">
+<img src="img/VEL6019.jpg" width="820" height="1098" alt="マットナイロンフードブルゾンを着用" loading="lazy" decoding="async">
+<figcaption><span class="cat">OUTER</span><span class="nm">マットナイロンフードブルゾン</span></figcaption>
+</figure>
+<figure class="look" style="--i:2">
+<img src="img/VEL6004.jpg" width="820" height="1098" alt="ハーフジップポンチプルオーバーを着用" loading="lazy" decoding="async">
+<figcaption><span class="cat">TOPS</span><span class="nm">ハーフジップポンチプルオーバー</span></figcaption>
+</figure>
+<figure class="look" style="--i:3">
+<img src="img/VEL6003.jpg" width="820" height="1098" alt="ツータックバルーンスラックスを着用" loading="lazy" decoding="async">
+<figcaption><span class="cat">BOTTOMS</span><span class="nm">ツータックバルーンスラックス</span></figcaption>
+</figure>
+<figure class="look" style="--i:4">
+<img src="img/VEL6014.jpg" width="820" height="1098" alt="テーラードワイドセットアップを着用" loading="lazy" decoding="async">
+<figcaption><span class="cat">SET UP</span><span class="nm">テーラードワイドセットアップ</span></figcaption>
+</figure>
+<figure class="look" style="--i:5">
+<img src="img/VEL6016.jpg" width="820" height="1098" alt="ボリュームソールスニーカーを着用" loading="lazy" decoding="async">
+<figcaption><span class="cat">SHOES</span><span class="nm">ボリュームソールスニーカー</span></figcaption>
+</figure>
+  </div>
+  <p class="note">全24型で開店します。価格とサイズの実寸表は、開店と同時に公開します。</p>
+</section>
+
+<section class="wrap">
+  <div class="sec-head"><p class="eyebrow">Before You Ask</p><h2>先に言っておきます</h2></div>
+  <dl class="facts">
+    <div><dt>届くまで10日から14日かかります</dt><dd>海外の仕入れ先から直接お届けするためです。早く着く方法もありますが、その分の値段を服にまわしています。</dd></div>
+    <div><dt>関税がかかった場合は当店が負担します</dt><dd>お客様に追加で請求することはありません。領収書をお送りいただければ全額返金します。</dd></div>
+    <div><dt>洗濯表示と素材表示は全商品に付けます</dt><dd>海外から直接届く服では省かれがちですが、付けないものは扱いません。</dd></div>
+    <div><dt>サイズは実寸で書きます</dt><dd>着丈・肩幅・袖丈・胸囲を1cm単位で。モデルの身長と体重、着ているサイズも一緒に載せます。</dd></div>
+  </dl>
+</section>
+
+<section class="join">
+  <div class="wrap inner">
+    <p class="eyebrow">Open First</p>
+    <h2>開店したら、いちばん先にお知らせします</h2>
+    <p>公式LINEの友だち限定で、開店当日に使えるクーポンをお渡ししています。新作の入荷も、まずここでお知らせします。</p>
+    <a class="cta" href="https://lin.ee/VlIqi0E" rel="noopener">友だち追加してクーポンを受け取る<span>LINE</span></a>
+  </div>
+</section>
+
+<div class="wrap ends">
+  <div class="row"><span class="k">Instagram</span><a href="https://www.instagram.com/velzo_clothes/" rel="noopener">@velzo_clothes</a></div>
+  <div class="row"><span class="k">Contact</span><a href="mailto:info@velzo.jp">info@velzo.jp</a></div>
+  <div class="row"><span class="k">Store</span><span>まもなく開店します</span></div>
+</div>
+
+<div class="wrap"><footer><span>&copy; 2026 VELZO</span><span>velzo.jp</span></footer></div>
