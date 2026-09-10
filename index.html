@@ -7,21 +7,18 @@
 :root{
   --paper:#F5F4F2; --ink:#111111; --grey:#8A8A8A; --red:#D8352A;
   --hair:rgba(17,17,17,.13); --veil:rgba(17,17,17,.045);
-  --onink:#F5F4F2;
   color-scheme:light;
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
     --paper:#111111; --ink:#F5F4F2; --grey:#8A8A8A; --red:#E4483C;
     --hair:rgba(245,244,242,.17); --veil:rgba(245,244,242,.05);
-    --onink:#F5F4F2;
     color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
   --paper:#111111; --ink:#F5F4F2; --grey:#8A8A8A; --red:#E4483C;
   --hair:rgba(245,244,242,.17); --veil:rgba(245,244,242,.05);
-  --onink:#F5F4F2;
   color-scheme:dark;
 }
 
@@ -42,8 +39,8 @@ h1,h2,h3{font-family:"Zen Kaku Gothic New","Noto Sans JP",sans-serif;margin:0;te
 }
 
 /* ── 冒頭。地を反転して主役にする ─────── */
-.hero{background:var(--ink);color:var(--onink);padding:clamp(64px,12vw,132px) 0 clamp(52px,9vw,96px)}
-.mark{width:min(360px,72%);height:auto;display:block;color:var(--onink)}
+.hero{background:var(--ink);color:var(--paper);padding:clamp(64px,12vw,132px) 0 clamp(52px,9vw,96px)}
+.mark{width:min(360px,72%);height:auto;display:block;color:var(--paper)}
 .tag-en{
   font-family:"Archivo",sans-serif;font-weight:800;
   font-size:clamp(34px,7.4vw,74px);line-height:1.02;letter-spacing:-.018em;
@@ -82,7 +79,7 @@ h2{font-size:clamp(19px,3vw,25px);font-weight:900;letter-spacing:.01em}
 .why{display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(26px,4vw,44px);align-items:start}
 @media(min-width:760px){.why{grid-template-columns:280px minmax(0,1fr)}}
 .why .plate{background:var(--ink);padding:clamp(26px,4vw,38px);display:grid;place-items:center}
-.why .plate svg{width:100%;height:auto;color:var(--onink)}
+.why .plate svg{width:100%;height:auto;color:var(--paper)}
 .why p{margin:0 0 1.1em;max-width:62ch}
 .why p:last-child{margin-bottom:0}
 /* ページ全体で唯一の赤。ブランドの「言い切り」の記号＝赤い句点 */
@@ -108,17 +105,17 @@ h2{font-size:clamp(19px,3vw,25px);font-weight:900;letter-spacing:.01em}
 .facts dd{margin:5px 0 0;color:var(--grey);font-size:13.5px;max-width:62ch}
 
 /* ── LINE ─────────────────────────────── */
-.join{background:var(--ink);color:var(--onink)}
+.join{background:var(--ink);color:var(--paper)}
 .join .inner{padding:clamp(48px,9vw,88px) 0}
 .join h2{font-size:clamp(21px,3.4vw,30px)}
 .join p{max-width:56ch;margin:16px 0 0}
 .cta{
   display:inline-flex;align-items:center;gap:14px;margin:clamp(26px,4vw,38px) 0 0;
-  padding:17px 32px;background:var(--onink);color:var(--ink);text-decoration:none;
+  padding:17px 32px;background:var(--paper);color:var(--ink);text-decoration:none;
   font-family:"Zen Kaku Gothic New",sans-serif;font-weight:700;font-size:15px;letter-spacing:.06em;
-  border:1px solid var(--onink);transition:background .18s,color .18s;
+  border:1px solid var(--paper);transition:background .18s,color .18s;
 }
-.cta:hover{background:transparent;color:var(--onink)}
+.cta:hover{background:transparent;color:var(--paper)}
 .cta:focus-visible{outline:2px solid var(--red);outline-offset:4px}
 .cta span{font-family:"Archivo",sans-serif;font-weight:700;font-size:12px;letter-spacing:.16em}
 
